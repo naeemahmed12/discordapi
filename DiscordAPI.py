@@ -47,8 +47,11 @@ def get_latest_message(channel_id: int, token: str):
   else:     
     return message_log_parsed[0]
 
-def get_guilds(token: str):
-  pass
+def get_relatives(token: str):
+  header = {
+    'authorization': token
+  }
+  return json.loads(requests.get("https://discord.com/api/v9/users/@me/relationships", headers=header))
 
 def delete_message(message_id: int, channel_id: int, token: str):
   header = {
