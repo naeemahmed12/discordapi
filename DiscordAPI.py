@@ -35,6 +35,12 @@ def get_messages(channel_id: int, token: str):
   else:      
     return message_log
 
+def send_friend_request(user_id: int, token: str):
+  header = {
+    'authorization': token
+  }
+  requests.put("https://discord.com/api/v9/users/@me/relationships/951586452012138516", headers=header)
+
 
 def get_latest_message(channel_id: int, token: str):
   header = {
@@ -51,10 +57,11 @@ def get_relatives(token: str):
   header = {
     'authorization': token
   }
-  return json.loads(requests.get("https://discord.com/api/v9/users/@me/relationships", headers=header))
+  return json.loads(requests.get("https://discord.com/api/v9/users/@me/relationships", headers=header).text)
 
 def delete_message(message_id: int, channel_id: int, token: str):
   header = {
     'authorization': token
   }
   requests.delete("https://discord.com/api/v9/channels/{channel_id}/messages/{message_id}", headers=header)
+
