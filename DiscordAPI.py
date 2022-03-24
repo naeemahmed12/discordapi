@@ -31,7 +31,7 @@ def get_messages(channel_id: int, token: str):
   message_log = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages?limit=50', headers=header)
   message_log = json.loads(message_log.text)
   if message_log == {'message': '401: Unauthorized', 'code': 0}:
-    return 0
+    return 401
   else:      
     return message_log
 
@@ -49,8 +49,9 @@ def get_latest_message(channel_id: int, token: str):
   message_log = requests.get(f'https://discord.com/api/v9/channels/{channel_id}/messages?limit=50', headers=header)
   message_log_parsed = json.loads(message_log.text)
   if message_log_parsed == {'message': '401: Unauthorized', 'code': 0}:
-    return 0
+    return 401
   else:     
+    get_latest_message.content = message_log_parsed[0]['content']
     return message_log_parsed[0]
 
 def get_relatives(token: str):
@@ -64,4 +65,3 @@ def delete_message(message_id: int, channel_id: int, token: str):
     'authorization': token
   }
   requests.delete("https://discord.com/api/v9/channels/{channel_id}/messages/{message_id}", headers=header)
-
