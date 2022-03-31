@@ -78,6 +78,3 @@ def get_relatives(token: str):
   if relatives.status_code == 404:
     raise TokenUnauthorised(f"Could not find the relatives for \"{token}\"")
   relatives_parsed = json.loads(relatives.text)
-
-  
-  
