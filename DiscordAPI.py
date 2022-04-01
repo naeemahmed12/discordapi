@@ -1,6 +1,10 @@
 import requests
 import json
 
+# Exception / Error Handling Classes
+
+# ----------------------------
+
 class TokenUnauthorised(Exception):
   def __init__(self, *args: object) -> None:
       super().__init__(*args)
@@ -13,6 +17,11 @@ class ChannelNotFound(Exception):
   def __init__(self, *args: object) -> None:
       super().__init__(*args)
 
+# ----------------------------
+
+# DiscordAPI functions
+
+# ----------------------------
 
 def get_profile(token: str):
   headers = {
@@ -77,4 +86,17 @@ def get_relatives(token: str):
     raise TokenUnauthorised(f"Token \"{token}\" is not authorised to view relatives. Please make sure that \"{token}\" is a real discord account")
   if relatives.status_code == 404:
     raise TokenUnauthorised(f"Could not find the relatives for \"{token}\"")
-  relatives_parsed = json.loads(relatives.text)
+  else:
+    relatives_parsed = json.loads(relatives.text)
+    return relatives_parsed
+
+def send_dm(message: str,relative_id: int, token: str):
+  header = {
+    'authorization': token
+  }
+  payload = {
+    'content': message
+  }
+  print("Function not complete")
+
+# ----------------------------
