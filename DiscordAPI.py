@@ -100,3 +100,6 @@ def send_dm(message: str,relative_id: int, token: str):
   print("Function not complete")
 
 # ----------------------------
+
+if __name__ == "__main__":
+  print("\n---------------------------------------\n\nINFO: \n\nTo use the DiscordAPI. Import this file into any project and access this file's functions from there.\n\n\nFor Example:\n\nimport DiscordAPI as discord\ndiscord.send_message(\"Hello World!\", 65437890303, \"A token\")\n\n---------------------------------------\n")
